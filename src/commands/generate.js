@@ -5,4 +5,4 @@ module.exports = (msg, args, db) => {
     const testDB = db.collection('keys')
     console.log(testDB)
     msg.channel.send({ embed: embeds.help })
-  }
+}
