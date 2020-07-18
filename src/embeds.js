@@ -14,12 +14,25 @@ module.exports = {
     },
     help: {
         title: '**Help** :information_source:',
+        color: 2539471,
         fields: Object.keys(commands).map(k => {
             return {
               name: k,
               value: commands[k].desc
             }
-          })
+          }),
+        footer: { 
+            text: "Proxy Support Bot | jazonl#2576" 
+        }
+    },
+    incorrectArgs: {
+        title: '**Invalid Syntax** :warning:',
+        description:
+            'You provided the incorrect amount of arguments to the command! Check `!help` for command usage',
+        color: 2539471,
+        footer: {
+            text: "Proxy Support Bot | jazonl#2576"
+        }
     }
 }
 

@@ -37,16 +37,18 @@ client.login(cfg.token);
 MongoClient.connect(cfg.database).then( dbObj => {
     const db = dbObj.db('proxydata')
 
-    client.on('message', message => {
+    client.on('message', msg => {
         
-        if (!message.content.startsWith(prefix) || message.author.bot) return;
+        if (!msg.content.startsWith(prefix) || msg.author.bot) return;
     
-        const args = message.content.slice(prefix.length).trim().split(/ +/);
-        const command = args.shift().toLowerCase();
+        const splitMsg = msg.content.split(' ')
+        const command = splitMsg[0].slice(1).toLowerCase()
+        const args = splitMsg.slice(1)
+
         console.log(commands)
         commands[command]
-            ? commands[command].command(message, args, db)
-            : message.channel.send({ embed: embeds.unknownCommand})
+            ? commands[command].command(msg, args, db)
+            : msg.channel.send({ embed: embeds.unknownCommand})
     });
 });
 

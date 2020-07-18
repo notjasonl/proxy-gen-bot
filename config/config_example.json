@@ -1,5 +1,5 @@
 {
     "token": "bot token",
-    "proxiwareAPI", "proxiware api ket",
+    "proxiwareAPI": "proxiware api ket",
     "database": "mongodb://username:password@hostname:27107/?authSource=admin"
 }
