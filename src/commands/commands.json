@@ -1,0 +1,37 @@
+{
+    "newuser": {
+        "name": "newuser",
+        "dmOnly": true,
+        "args": "[email, username, password]",
+        "desc": 
+            "Creates a new user in the database with your Shopify credentials sent in the email"
+    },
+    "bind": {
+        "name": "bind",
+        "dmOnly": true,
+        "args": "[key]",
+        "desc":
+            "Binds a given license key to your account, and adds data to your account"
+    },
+    "generate": {
+        "name": "generate",
+        "dmOnly": true,
+        "args": "none",
+        "desc":
+            "User interactable prompt to generate proxies for country, type, and quantity"
+    },
+    "data": {
+        "name": "data",
+        "dmOnly": false,
+        "args": "none",
+        "desc":
+            "Gets the remaining bandwidth left for your account, in GB"
+    },
+    "help": {
+        "name": "help",
+        "dmOnly": false,
+        "args": "none",
+        "desc":
+            "Shows info about the commands available to the bot"
+    }
+}

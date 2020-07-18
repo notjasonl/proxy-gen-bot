@@ -1,0 +1,25 @@
+{
+  "name": "proxy-gen-bot",
+  "version": "0.0.1",
+  "description": "proxy gen support bot",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "mongodb": "^3.5.9",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notjasonl/proxy-gen-bot.git"
+  },
+  "author": "Jason Liu",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/notjasonl/proxy-gen-bot/issues"
+  },
+  "homepage": "https://github.com/notjasonl/proxy-gen-bot#readme"
+}
