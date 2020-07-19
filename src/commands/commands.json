@@ -16,22 +16,29 @@
     "generate": {
         "name": "generate",
         "dmOnly": true,
-        "args": "none",
+        "args": "",
         "desc":
             "User interactable prompt to generate proxies for country, type, and quantity"
     },
     "data": {
         "name": "data",
         "dmOnly": false,
-        "args": "none",
+        "args": "",
         "desc":
             "Gets the remaining bandwidth left for your account, in GB"
     },
     "help": {
         "name": "help",
         "dmOnly": false,
-        "args": "none",
+        "args": "",
         "desc":
             "Shows info about the commands available to the bot"
+    },
+    "generateKeys": {
+        "name": "generatekeys",
+        "dmOnly": true,
+        "args": "",
+        "desc":
+            "Generate a specified number of keys with a specified amount of bandwidth"
     }
 }

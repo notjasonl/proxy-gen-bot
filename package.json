@@ -4,6 +4,7 @@
   "description": "proxy gen support bot",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "discord.js": "^12.2.0",
     "mongodb": "^3.5.9",
     "uuid": "^8.2.0"

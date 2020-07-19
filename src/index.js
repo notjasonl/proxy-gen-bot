@@ -45,10 +45,15 @@ MongoClient.connect(cfg.database).then( dbObj => {
         const command = splitMsg[0].slice(1).toLowerCase()
         const args = splitMsg.slice(1)
 
-        console.log(commands)
-        commands[command]
-            ? commands[command].command(msg, args, db)
-            : msg.channel.send({ embed: embeds.unknownCommand})
+        if (commands[command]) {
+            if (msg.channel.type != 'dm' && commands[command].dmOnly === true) {
+                msg.channel.send({ embed: embeds.dmOnly });
+                return;
+            }
+            commands[command].command(msg, args, db)
+        } else {
+            msg.channel.send({ embed: embeds.unknownCommand})
+        }
     });
 });
 
