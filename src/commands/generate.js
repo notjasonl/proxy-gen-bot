@@ -45,7 +45,18 @@ module.exports = (msg, args, db) => {
             msg.channel.send({ embed: embeds.prompts.proxyCountry(countries) });
             msg.channel.awaitMessages(m => m.author.id == msg.author.id,
                 { max: 1, time: 30000 }).then(collected => {     
-                    let country = collected.first().content           
+                    let countryRaw = collected.first().content.trim().toLowerCase();
+                    let processedCountry = [];
+                    let splitCountry = countryRaw.split(" ")
+                    splitCountry.forEach(word => {
+                        if (word == 'and') {
+                            processedCountry.push(word)
+                        } else {
+                            processedCountry.push(word.charAt(0).toUpperCase() + word.slice(1))
+                        }
+                    })
+                    let country = processedCountry.join(" ")
+                    
                     if (!countries.includes(country)) {
                         msg.channel.send({ embed: embeds.errors.countryNotFound })
                         return;

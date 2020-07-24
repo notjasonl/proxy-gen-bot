@@ -20,7 +20,7 @@
         "desc":
             "Shows info about the commands available to the bot"
     },
-        "bind": {
+    "bind": {
         "name": "bind",
         "dmOnly": true,
         "args": "",

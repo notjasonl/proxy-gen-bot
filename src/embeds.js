@@ -193,10 +193,6 @@ module.exports = {
                         value: countries
                     },
                     {
-                        name: "Note",
-                        value: "Spelling and capitalization matter here 😊"
-                    },
-                    {
                         name: "Timeout",
                         value: "You have 30 seconds to enter a value, or type `cancel`"
                     }

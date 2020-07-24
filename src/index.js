@@ -15,6 +15,7 @@ const commands = Object.keys(rawCommands).reduce((obj, c) => {
 
 const prefix = "!"
 const dbName = "proxydata"
+const version = cfg.version;
 
 const client = new Discord.Client();
 
@@ -22,7 +23,7 @@ const client = new Discord.Client();
 
 // discord stuff
 client.on('ready', () => {
-    client.user.setPresence({ activity: { name: 'with proxies' }, status: 'online'})
+    client.user.setPresence({ activity: { name: `with proxies | ${version}`}, status: 'online'})
         .then(console.log)
         .catch(console.error);
     console.log("Logged into server!")
