@@ -6,8 +6,8 @@
         "desc": 
             "Creates a new user in the database with your Shopify credentials sent in the email"
     },
-    "bind": {
-        "name": "bind",
+    "bindKey": {
+        "name": "bindKey",
         "dmOnly": true,
         "args": "[key]",
         "desc":
@@ -34,11 +34,25 @@
         "desc":
             "Shows info about the commands available to the bot"
     },
-    "generateKeys": {
+    "generatekeys": {
         "name": "generatekeys",
         "dmOnly": true,
         "args": "",
         "desc":
             "Generate a specified number of keys with a specified amount of bandwidth"
+    },
+    "bind": {
+        "name": "bind",
+        "dmOnly": true,
+        "args": "",
+        "desc":
+            "Adds proxies to your account based on what you ordered off Shopify"
+    },
+    "addip" :{
+        "name": "addip",
+        "dmOnly": true,
+        "args": "",
+        "desc":
+            "Binds another ip to your account, max of 5"
     }
 }

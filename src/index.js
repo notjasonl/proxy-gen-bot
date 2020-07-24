@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
 const path = require('path');
-const { v4 : uuidv4 } = require('uuid');
 
 const cfg = require('../config/config.json');
 const rawCommands = require('./commands/commands.json');
