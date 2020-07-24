@@ -1,18 +1,4 @@
 {
-    "newuser": {
-        "name": "newuser",
-        "dmOnly": true,
-        "args": "[email, username, password]",
-        "desc": 
-            "Creates a new user in the database with your Shopify credentials sent in the email"
-    },
-    "bindKey": {
-        "name": "bindKey",
-        "dmOnly": true,
-        "args": "[key]",
-        "desc":
-            "Binds a given license key to your account, and adds data to your account"
-    },
     "generate": {
         "name": "generate",
         "dmOnly": true,
@@ -34,14 +20,7 @@
         "desc":
             "Shows info about the commands available to the bot"
     },
-    "generatekeys": {
-        "name": "generatekeys",
-        "dmOnly": true,
-        "args": "",
-        "desc":
-            "Generate a specified number of keys with a specified amount of bandwidth"
-    },
-    "bind": {
+        "bind": {
         "name": "bind",
         "dmOnly": true,
         "args": "",
