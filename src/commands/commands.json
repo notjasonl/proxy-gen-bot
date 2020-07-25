@@ -27,11 +27,25 @@
         "desc":
             "Adds proxies to your account based on what you ordered off Shopify"
     },
-    "addip" :{
+    "addip": {
         "name": "addip",
         "dmOnly": true,
         "args": "",
         "desc":
             "Binds another ip to your account, max of 5"
+    },
+    "removeip": {
+        "name": "removeip",
+        "dmOnly": true,
+        "args": "",
+        "desc":
+            "Removes an ip from your account"
+    }, 
+    "ips": {
+        "name": "ips",
+        "dmOnly": true,
+        "args": "",
+        "desc":
+            "Shows all the ip addresses bound to your account"
     }
 }

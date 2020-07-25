@@ -15,7 +15,7 @@ const commands = Object.keys(rawCommands).reduce((obj, c) => {
 
 const prefix = "!"
 const dbName = "proxydata"
-const version = cfg.version;
+const version = cfg.version
 
 const client = new Discord.Client();
 

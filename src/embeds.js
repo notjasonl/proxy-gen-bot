@@ -4,6 +4,24 @@ const version = require('../package.json').version;
 
 module.exports = {
     errors: {
+        noIPs: {
+            title: '**No IPs**  🤔',
+            description: 
+                'There don\'t appear to be any ips bound to your account!',
+            color: 14242639,
+            footer: {
+                text: "Proxy Support Bot | jazonl#2576"
+            }
+        },
+        addressNotFound: {
+            title: '**Address Not Found**  🤔',
+            description: 
+                'The ip address you entered isn\'t bound to your account, try again!',
+            color: 14242639,
+            footer: {
+                text: "Proxy Support Bot | jazonl#2576"
+            }
+        },
         addressBound: {
             title: '**Address Bound**  🤔',
             description: 
@@ -75,10 +93,33 @@ module.exports = {
         }
     },
     prompts: {
+        removeIP: {
+            title: '**IP Binding**  🗺',
+            description:
+                'What ip would you like to remove?',
+            color: 161240,
+            fields: [
+                {
+                    name: "What **is** my public ip?",
+                    value: "You can find it by going [here](https://www.whatismyip.com/what-is-my-public-ip-address/)."
+                },
+                {
+                    name: "How do I find my bound ips?",
+                    value: "You can use the `!ips` command to see your ips"
+                },
+                {
+                    name: "Timeout",
+                    value: "You have 60 seconds to enter a value, or type `cancel`"
+                }
+            ],
+            footer: {
+                text: "Proxy Support Bot | jazonl#2576"
+            }
+        },
         addIP: {
             title: '**IP Binding**  🗺',
             description:
-                'What\'s your public ip?',
+                'What ip would you like to add?',
             color: 161240,
             fields: [
                 {
@@ -91,7 +132,7 @@ module.exports = {
                 },
                 {
                     name: "Timeout",
-                    value: "You have 30 seconds to enter a value, or type `cancel`"
+                    value: "You have 60 seconds to enter a value, or type `cancel`"
                 }
             ],
             footer: {
@@ -233,6 +274,23 @@ module.exports = {
             }
         }
     },
+    showIPs: (ips) => {
+        return {
+            title: '**Bound IPs**  🔑',
+            description:
+                `There are ${ips.length} ips bound to your account:`,
+            fields: [
+                {
+                    name: "IPs",
+                    value: ips
+                }
+            ],
+            color: 6076508,
+            footer: {
+                text: "Proxy Support Bot | jazonl#2576"
+            }
+        }
+    },
     getData: (used, starting, percent) => {
         return {
             title: '**Check Data Usage**  ✅',
@@ -278,11 +336,22 @@ module.exports = {
             }
         }
     },
+    ipRemoved: (pubIP) => {
+        return {
+            title: '**IP Removed Successfully** 😄',
+            description:
+                `You successfully removed ${pubIP} from your account!`,
+            color: 6076508,
+            footer: {
+                text: "Proxy Support Bot | jazonl#2576"
+            }
+        }
+    },
     orderBoundSuccess: (order, data, addedData) => {
         return {
             title: '**Order Claimed Successfully** 😄',
             description:
-                `You successfully claimed order **#${order}**!`,
+                `You successfully claimed order **#${order}**! Please use \`!addip\` to bind your ip.`,
             fields: [
                 {
                     name: 'Current Data',

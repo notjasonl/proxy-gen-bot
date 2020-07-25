@@ -121,88 +121,53 @@ module.exports = (msg, args, db) => {
                                 usersColl.find({ userID: userID }).toArray().then(userData => {
                                     if (userData.length === 0) {
                                         let orders = [orderID]
-        
-                                        msg.channel.send({ embed: embeds.prompts.publicIP });
-                                        msg.channel.awaitMessages(m => m.author.id == msg.author.id,
-                                            { max: 1, time : 30000 }).then(collected => {
-                                                if (collected.first().content.toLowerCase() == 'cancel') {
-                                                    msg.channel.send({ embed: embeds.cancelled });
-                                                    return;
-                                                }
-                                                if (!ipRE.test(collected.first().content)) {
-                                                    msg.channel.send({ embed: embeds.invalidIP })
-                                                    return
-                                                }
-                                    
-                                                pubIP = collected.first().content;
                                                 
-                                                fetch(proxiwareRoot + "user/create", {
-                                                    method: 'get',
-                                                    headers: proxiwareHeaders
-                                                }).then(res => {
-                                                    return res.json()
-                                                }).catch(err => {
-                                                    console.log(err)
-                                                    msg.channel.send({ embed: embeds.errors.proxiwareAuthError })
-                                                    return;
-                                                })
-                                                .then(json => {
-                                                    let proxiwareUID = json.user_id
-        
-                                                    usersColl.insertOne(
-                                                        {
-                                                            userID: userID,
-                                                            proxiwareUserID: proxiwareUID,
-                                                            email: email,
-                                                            orders: orders,
-                                                            startingData: addData,
-                                                            data: addData
-                                                        }, (err, data) => {
-                                                            if (err) console.log(err)
-                                                            console.log(data)
-                                                    })
-                
-                                                    let body = JSON.stringify({
-                                                        "user_id": json.user_id,
-                                                        "data_string": addData + "GB"
-                                                    })
-                
-                                                    fetch(proxiwareRoot + "user/data/add", {
-                                                        method: 'post',
-                                                        headers: proxiwareHeaders,
-                                                        body: body
-                                                    }).then(res => {
-                                                        return res.json()
-                                                    }).catch(err => {
-                                                        console.log(err)
-                                                        msg.channel.send({ embed: embeds.errors.proxiwareAuthError })
-                                                        return;
-                                                    })
-                                                    .then(json => {
-                                                        // console.log(json)
-                                                        let bindBody = JSON.stringify({
-                                                            "user_id": proxiwareUID,
-                                                            "addr": pubIP
-                                                        })
-                    
-                                                        fetch(proxiwareRoot + "user/binds/bind", {
-                                                            method: 'post',
-                                                            headers: proxiwareHeaders,
-                                                            body: bindBody
-                                                        }).then(res => {
-                                                            return res.json()
-                                                        }).catch(err => {
-                                                            console.log(err)
-                                                            msg.channel.send({ embed: embeds.errors.proxiwareAuthError })
-                                                            return;
-                                                        })
-                                                        .then(json => {
-                                                            msg.channel.send({ embed: embeds.orderBoundSuccess(orderID, addData, addData) })
-                                                        })
-                                                    })
-                                                })
+                                        fetch(proxiwareRoot + "user/create", {
+                                            method: 'get',
+                                            headers: proxiwareHeaders
+                                        }).then(res => {
+                                            return res.json()
+                                        }).catch(err => {
+                                            console.log(err)
+                                            msg.channel.send({ embed: embeds.errors.proxiwareAuthError })
+                                            return;
+                                        })
+                                        .then(json => {
+                                            let proxiwareUID = json.user_id
+
+                                            usersColl.insertOne(
+                                                {
+                                                    userID: userID,
+                                                    proxiwareUserID: proxiwareUID,
+                                                    email: email,
+                                                    orders: orders,
+                                                    startingData: addData,
+                                                    data: addData
+                                                }, (err, data) => {
+                                                    if (err) console.log(err)
+                                                    console.log(data)
                                             })
         
+                                            let body = JSON.stringify({
+                                                "user_id": json.user_id,
+                                                "data_string": addData + "GB"
+                                            })
+        
+                                            fetch(proxiwareRoot + "user/data/add", {
+                                                method: 'post',
+                                                headers: proxiwareHeaders,
+                                                body: body
+                                            }).then(res => {
+                                                return res.json()
+                                            }).catch(err => {
+                                                console.log(err)
+                                                msg.channel.send({ embed: embeds.errors.proxiwareAuthError })
+                                                return;
+                                            })
+                                            .then(json => {
+                                                msg.channel.send({ embed: embeds.orderBoundSuccess(orderID, addData, addData) })
+                                            })
+                                        })
                                     } else {
                                         if (orderID in userData[0].orders) return;
                                         usersColl.updateOne(

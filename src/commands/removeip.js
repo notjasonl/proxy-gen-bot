@@ -21,7 +21,7 @@ module.exports = (msg, args, db) => {
             msg.channel.send({ embed: embeds.userNotFound })
             return;
         }
-        msg.channel.send({ embed: embeds.prompts.addIP })
+        msg.channel.send({ embed: embeds.prompts.removeIP })
         msg.channel.awaitMessages(m => m.author.id == msg.author.id,
             { max: 1, time: 60000 }).then(collected => {
                 if (collected.first().content.trim().toLowerCase() == 'cancel') {
@@ -36,16 +36,15 @@ module.exports = (msg, args, db) => {
                 pubIP = collected.first().content;
                 let proxiwareID = userData[0].proxiwareUserID;
 
-                let bindBody = JSON.stringify({
+                let removeBody = JSON.stringify({
                     "user_id": proxiwareID,
-                    "addr": pubIP,
-                    strict: true
+                    "addr": pubIP
                 })
 
-                fetch(proxiwareRoot + "user/binds/bind", {
+                fetch(proxiwareRoot + "user/binds/unbind", {
                     method: 'post',
                     headers: proxiwareHeaders,
-                    body: bindBody
+                    body: removeBody
                 }).then(res => {
                     return res.json()
                 }).catch(err => {
@@ -53,14 +52,14 @@ module.exports = (msg, args, db) => {
                 })
                 .then(json => {
                     if (json.error != null) {
-                        msg.channel.send({ embed: embeds.errors.addressBound })
+                        msg.channel.send({ embed: embeds.errors.addressNotFound })
                     } else {
-                        msg.channel.send({ embed: embeds.ipAdded(pubIP) })
+                        msg.channel.send({ embed: embeds.ipRemoved(pubIP) })
                     }
                 })
             }).catch((err) => {
                 console.log(err)
                 msg.channel.send({ embed: embeds.noAnswer })
             })
-    })
+        })
 }
