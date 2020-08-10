@@ -112,7 +112,6 @@ module.exports = (msg, args, db) => {
                         })
                         
                         ordersColl.find({ orderID: orderID }).toArray().then(orderData => {
-                            let orders = [orderID]
                             if (orderData.length === 0) {
                                 ordersColl.insertOne(order, (err, data) => {
                                         if (err) console.log(err)
@@ -177,6 +176,7 @@ module.exports = (msg, args, db) => {
                                                     orders: orderID
                                                 },
                                                 $inc: {
+                                                    startingData: addData,
                                                     data: addData
                                                 }
                                             }, (err, data) => {
