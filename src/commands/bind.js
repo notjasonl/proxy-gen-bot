@@ -108,7 +108,13 @@ module.exports = (msg, args, db) => {
                         let items = json.orders[0].line_items;
 
                         items.forEach(item => {
-                            addData += variants.resi[item.variant_id]
+                            try {
+                                addData += variants.resi[item.variant_id]
+                            }
+                            catch (err) {
+                                console.log(err)
+                            }
+                            
                         })
                         
                         ordersColl.find({ orderID: orderID }).toArray().then(orderData => {
@@ -140,8 +146,8 @@ module.exports = (msg, args, db) => {
                                                     proxiwareUserID: proxiwareUID,
                                                     email: email,
                                                     orders: orders,
-                                                    startingData: addData,
-                                                    data: addData
+                                                    startingData: parseFloat(addData),
+                                                    data: parseFloat(addData)
                                                 }, (err, data) => {
                                                     if (err) console.log(err)
                                                     console.log(data)
